@@ -30,8 +30,34 @@ public class Singleton // Cách dễ nhất để triển khai Singleton
         }
     }
 }
+
+public class Client
+{
+    public void Main()
+    {
+        Singleton singleton1 = Singleton.Instance;
+        Singleton singleton2 = Singleton.Instance;
+
+        if (singleton1 == singleton2)
+        {
+            System.Console.WriteLine("Singleton: Singleton chỉ có một instance.");
+        }
+        else
+        {
+            System.Console.WriteLine("Singleton: Singleton có nhiều instance.");
+        }
+    }
+}
 ```
 ### Tham khảo thêm về Singleton tai [đây](https://refactoring.guru/design-patterns/singleton)
+
+### Giải thích:
+- `Singleton` class có một private constructor để ngăn việc tạo instance từ bên ngoài.
+- `Singleton` class có một static property `Instance` để trả về một instance của `Singleton`.
+- `Instance` property kiểm tra xem instance đã được tạo chưa, nếu chưa thì tạo mới instance, nếu đã có thì trả về instance đã tạo.
+- `Client` sử dụng `Singleton.Instance` để lấy instance của `Singleton`.
+- Điểm mạnh là chỉ có một instance của `Singleton` được tạo ra giúp giảm bộ nhớ và tăng hiệu suất.
+- Điểm yếu là không thể tạo được nhiều instance của `Singleton` nếu cần, tính linh hoạt thấp.
 
 ## 2. Factory Method
 - Factory Method là một design pattern cho phép một class tạo ra một object con của một class khác.
@@ -109,6 +135,8 @@ public class Client
 - `ConcreteProductA` và `ConcreteProductB` là các class implement `IProduct`.
 - `Creator` là một abstract class với phương thức `FactoryMethod` trả về một object của `IProduct`.
 - `ConcreteCreatorA` và `ConcreteCreatorB` là các class con của `Creator` và implement phương thức `FactoryMethod` để trả về `ConcreteProductA` và `ConcreteProductB` tương ứng.
+- Điểm mạnh của Factory Method là giảm sự phụ thuộc giữa các class, giúp dễ dàng mở rộng và bảo trì code, giúp tạo ra các object mà không cần biết cụ thể class nào đang tạo ra object.
+- Điểm yếu của Factory Method là cần tạo một class mới cho mỗi object cần tạo ra, dẫn đến tăng số lượng class trong project, làm tăng độ phức tạp của project, gây khó khăn trong việc quản lý code.
 
 ### Tham khảo thêm về Factory Method tại [đây](https://refactoring.guru/design-patterns/factory-method)
 
@@ -168,6 +196,8 @@ public class Client
 - `Adapter` chứa một object của `Adaptee` và implement `ITarget` để chuyển đổi `Adaptee` thành `ITarget`.
 - `Client` sử dụng `Adapter` để hoạt động với `Adaptee` thông qua `ITarget`.
 - `Adapter` giúp `Adaptee` hoạt động với `ITarget` mà không cần thay đổi code của `Adaptee`.
+- Điểm mạnh của Adapter là giảm sự phụ thuộc giữa các class, giúp dễ dàng mở rộng và bảo trì code, giúp các class không tương thích làm việc cùng nhau dễ dàng hơn. Có thể sử dụng Adapter để thay đổi logic của một class mà không cần thay đổi code của class đó.
+- Điểm yếu của Adapter là tăng số lượng class trong project, làm tăng độ phức tạp của project. Nếu sử dụng nhiều Adapter, dễ dẫn đến việc khó quản lý code.
 
 ### Tham khảo thêm về Adapter tại [đây](https://refactoring.guru/design-patterns/adapter)
 
@@ -285,4 +315,6 @@ public class Client
 - `Client` sử dụng `Facade` để hoạt động với các class phức tạp.
 - Nếu không sử dụng `Facade`, client phải gọi các phương thức của các class phức tạp một cách riêng lẻ.
 - Nếu cần thay đổi logic của các class phức tạp, chỉ cần thay đổi trong `Facade` mà không cần thay đổi trong client.
+- Điểm mạnh của Facade là giảm sự phức tạp của hệ thống, giúp dễ dàng mở rộng và bảo trì code, giúp client không cần biết về các class phức tạp, chỉ cần sử dụng `Facade` có thể tương tác với nhiều class phức tạp.
+- Điểm yếu của Facade là tăng số lượng class trong project, làm tăng độ phức tạp của project, 1 class `Facade` có thể chứa nhiều phương thức, dẫn đến việc class `Facade` gia tăng kích thước. Khi `Facade` được khởi tạo, tất cả các class phức tạp cũng được khởi tạo, dẫn đến tăng bộ nhớ.
 
