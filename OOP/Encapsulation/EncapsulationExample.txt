@@ -1,0 +1,66 @@
+
+            set
+            {
+                studentId = value;
+            }
+        }
+        public string PersonalId // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "personalId"
+        {
+            get { return personalId; }
+            set
+            {
+                personalId = value;
+            }
+        }
+
+        public string Name // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "name"
+        {
+            get { return name; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    name = value;
+                }
+                else
+                {
+                    throw new Exception("Human name must be string!");
+                }
+            }
+        }
+
+        public int BirthYear
+        {
+            get { return birthYear; }
+            set
+            {
+                if (value > 1900)
+                {
+                    birthYear = value;
+                }
+                else
+                {
+                    throw new Exception("human cant be older than 125 years old");
+                }
+            }
+        }
+
+        public int getAge()
+        {
+            return DateTime.Now.Year - birthYear;
+        }
+
+        public void Introduction()
+        {
+            Console.WriteLine($"Hi! My name is {name}. Im {this.getAge()} and my student ID is {studentId}");
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Student s = new Student("Ha Ngoc Linh", 1990, "GCH18077", "001231243352");
+            s.Introduction();
+        }
+    }
