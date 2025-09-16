@@ -1,66 +1,86 @@
+public class Student
+{
+    // Can't access level "private" - không thể truy cập vào giá trị private
+    // Đây là những trường thông tin được lưu trữ và giới hạn truy cập
+    private string name; // ten -- không thể truy cập được do giá trị là private
+    private int birthYear; // năm sinh
+    private string studentId; // Mã sinh viên
+    private string personalId; // CCCD
 
-            set
-            {
-                studentId = value;
-            }
-        }
-        public string PersonalId // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "personalId"
-        {
-            get { return personalId; }
-            set
-            {
-                personalId = value;
-            }
-        }
-
-        public string Name // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "name"
-        {
-            get { return name; }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    name = value;
-                }
-                else
-                {
-                    throw new Exception("Human name must be string!");
-                }
-            }
-        }
-
-        public int BirthYear
-        {
-            get { return birthYear; }
-            set
-            {
-                if (value > 1900)
-                {
-                    birthYear = value;
-                }
-                else
-                {
-                    throw new Exception("human cant be older than 125 years old");
-                }
-            }
-        }
-
-        public int getAge()
-        {
-            return DateTime.Now.Year - birthYear;
-        }
-
-        public void Introduction()
-        {
-            Console.WriteLine($"Hi! My name is {name}. Im {this.getAge()} and my student ID is {studentId}");
-        }
+    public Student(string _name, int _birthYear, string _studentId, string _personalId) { 
+        this.Name = _name;
+        this.BirthYear = _birthYear;
+        this.StudentId = _studentId;
+        this.PersonalId = _personalId;
     }
 
-    internal class Program
+    public Student() { }
+
+    public string StudentId // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "studentId"
     {
-        static void Main(string[] args)
+        get { return studentId; }
+        set
         {
-            Student s = new Student("Ha Ngoc Linh", 1990, "GCH18077", "001231243352");
-            s.Introduction();
+            studentId = value;
         }
     }
+    public string PersonalId // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "personalId"
+    {
+        get { return personalId; }
+        set
+        {
+            personalId = value;
+        }
+    }
+
+    public string Name // Biến trung gian xử lý hành động gán và lấy dữ liệu của biến "name"
+    {
+        get { return name; }
+        set
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                name = value;
+            }
+            else
+            {
+                throw new Exception("Human name must be string!");
+            }
+        }
+    }
+
+    public int BirthYear
+    {
+        get { return birthYear; }
+        set
+        {
+            if (value > 1900)
+            {
+                birthYear = value;
+            }
+            else
+            {
+                throw new Exception("human cant be older than 125 years old");
+            }
+        }
+    }
+
+    public int getAge()
+    {
+        return DateTime.Now.Year - birthYear;
+    }
+
+    public void Introduction()
+    {
+        Console.WriteLine($"Hi! My name is {name}. Im {this.getAge()} and my student ID is {studentId}");
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Student s = new Student("Ha Ngoc Linh", 1990, "GCH18077", "001231243352");
+        s.Introduction();
+    }
+}
